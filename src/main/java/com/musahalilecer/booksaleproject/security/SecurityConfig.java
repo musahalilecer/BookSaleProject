@@ -47,25 +47,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/book/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/book/**").hasRole("USER")
                         .requestMatchers(HttpMethod.DELETE, "/book/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/author/**").hasRole("USER")
 
-                        .requestMatchers(HttpMethod.POST, "/author/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/author/**").hasRole("USER")
 
-                        .requestMatchers(HttpMethod.GET, "/language/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/language/**").hasRole("USER")
-
-                        .requestMatchers(HttpMethod.GET, "/publisher/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/publisher/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/publisher/**").hasRole("USER")
-
-                        .requestMatchers(HttpMethod.GET, "/country/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/country/**").hasRole("USER")
-
-                        .requestMatchers(HttpMethod.GET, "customer/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "customer/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "customer/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "customer/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/author/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/author/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/country/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/publisher/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/language/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

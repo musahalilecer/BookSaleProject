@@ -9,10 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 
 
@@ -38,7 +35,7 @@ public class JwtService {
 
     public String createToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", user.getRole().name());
+        claims.put("authorities", List.of("ROLE_" + user.getRole().name())); // ✅ doğru yapı
         return createToken(claims, user.getUsername());
     }
 
