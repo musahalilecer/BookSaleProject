@@ -1,11 +1,17 @@
-# Java 17 kullan
+# 1. Java base image
 FROM eclipse-temurin:17-jdk-alpine
 
-# Çalışma dizini
+# 2. Çalışma dizinine geç
 WORKDIR /app
 
-# Jar dosyasını kopyala (dosya adını kendi jar dosyana göre değiştir)
-COPY build/libs/BookSaleProject-0.0.1-SNAPSHOT.jar app.jar
+# 3. Proje dosyalarını kopyala
+COPY . .
 
-# Spring Boot başlat
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# 4. Gradle wrapper'a çalıştırma izni ver
+RUN chmod +x ./gradlew
+
+# 5. JAR üret
+RUN ./gradlew build
+
+# 6. JAR'ı çalıştır
+ENTRYPOINT ["java", "-jar", "build/libs/BookSaleProject-0.0.1-SNAPSHOT.jar"]
